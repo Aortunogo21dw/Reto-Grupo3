@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<Vehículo>
+  <Camion>
+      <Matricula>123456</Matricula>
+      <Asientos>5</Asientos>
+      <Bastidor>123456</Bastidor>
+      <Color>Verde</Color>
+      <Precio>12000</Precio>
+      <Serie>4444</Serie>
+      <Mercancias>Arena</Mercancias>
+      <Aniofab>1990</Aniofab>
+      <Marca>Ford</Marca>
+      <Modelo>Chustang</Modelo>
+      <Capacidad>500</Capacidad>
+  </Camion>
+</Vehículo>

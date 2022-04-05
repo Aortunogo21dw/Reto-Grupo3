@@ -1050,5 +1050,158 @@ public class Modificar_Datos extends JFrame {
 		Leercam.setBounds(939, 394, 142, 23);
 		contentPane.add(Leercam);
 		
+		
+		
+		
+		
+		
+		
+		BotLeerXML.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(Leercoch.isSelected()) {
+					
+					
+					 // Instantiate the Factory
+				      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+				      FILENAME = "filecoche.xml";
+				 
+				      try {
+
+				          // optional, but recommended
+				          // process XML securely, avoid attacks like XML External Entities (XXE)
+				          dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+
+				          // parse XML file
+				          DocumentBuilder db = dbf.newDocumentBuilder();
+
+				          Document doc = db.parse(new File(FILENAME));
+
+				          // optional, but recommended
+				          // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
+				          doc.getDocumentElement().normalize();
+
+				        
+				          // get <staff>
+				          NodeList list = doc.getElementsByTagName("Coche");
+
+				          for (int temp = 0; temp < list.getLength(); temp++) {
+
+				              Node node = list.item(temp);
+
+				              if (node.getNodeType() == Node.ELEMENT_NODE) {
+
+				                  Element element = (Element) node;
+
+				                  // get staff's attribute
+				                 
+
+				                  // get text
+				                  String matricula = element.getElementsByTagName("Matricula").item(0).getTextContent();
+				                  String asientos = element.getElementsByTagName("Asientos").item(0).getTextContent();
+				                  String color = element.getElementsByTagName("Color").item(0).getTextContent();
+				                  String bastidor = element.getElementsByTagName("Bastidor").item(0).getTextContent();
+				                  String serie = element.getElementsByTagName("Serie").item(0).getTextContent();
+				                  String puertas = element.getElementsByTagName("Puertas").item(0).getTextContent();
+				                  String maletero = element.getElementsByTagName("Maletero").item(0).getTextContent();
+				                  String aniofab = element.getElementsByTagName("Aniofab").item(0).getTextContent();
+				                  String marca = element.getElementsByTagName("Marca").item(0).getTextContent();
+				                  String modelo = element.getElementsByTagName("Modelo").item(0).getTextContent();
+				                  
+				                  NodeList precioNodeList = element.getElementsByTagName("Precio");
+				                  String precio = precioNodeList.item(0).getTextContent();
+
+				                  
+				                  
+				                  
+				                  coche =new Coche(matricula,bastidor,Integer.parseInt(precio),serie,color,Integer.parseInt(asientos),Integer.parseInt(puertas),Integer.parseInt(maletero),aniofab,marca,modelo);
+									textArea.setText("");
+									textArea.append("Numero Matrícula : "+coche.getMat()+"\n"+"Numero Bastidor : "+coche.getNumBast()+"\n"+"Precio : "+coche.getPrecio()+ "\n" + "Serie : "+coche.getSerie()+ "\n"+"Color : "+coche.getColor()+"\n"+"Número Asientos : "+coche.getNumAsientos()+"\n"+"Número de Puertas : "+coche.getNumPuertas()+"\n"+"Capacidad maletero : "+coche.getCapacidadMaletero()+"\n"+"Año Fabricación : "+coche.getAniofab()+"\n"+"Marca : "+coche.getMarca()+"\n"+"Modelo : "+coche.getModelo());
+				                  
+				              }
+				          }
+
+				      } catch (ParserConfigurationException | SAXException | IOException r) {
+				          r.printStackTrace();
+				      }
+					
+					
+				}else {
+					
+					 // Instantiate the Factory
+				      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+				      FILENAME ="filecamion.xml";
+				 
+				      try {
+
+				          // optional, but recommended
+				          // process XML securely, avoid attacks like XML External Entities (XXE)
+				          dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+
+				          // parse XML file
+				          DocumentBuilder db = dbf.newDocumentBuilder();
+
+				          Document doc = db.parse(new File(FILENAME));
+
+				          // optional, but recommended
+				          // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
+				          doc.getDocumentElement().normalize();
+
+				        
+				          // get <staff>
+				          NodeList list = doc.getElementsByTagName("Camion");
+
+				          for (int temp = 0; temp < list.getLength(); temp++) {
+
+				              Node node = list.item(temp);
+
+				              if (node.getNodeType() == Node.ELEMENT_NODE) {
+
+				                  Element element = (Element) node;
+
+				                  // get staff's attribute
+				                 
+
+				                  // get text
+				                  String matricula = element.getElementsByTagName("Matricula").item(0).getTextContent();
+				                  String asientos = element.getElementsByTagName("Asientos").item(0).getTextContent();
+				                  String color = element.getElementsByTagName("Color").item(0).getTextContent();
+				                  String bastidor = element.getElementsByTagName("Bastidor").item(0).getTextContent();
+				                  String serie = element.getElementsByTagName("Serie").item(0).getTextContent();
+				                  String carga = element.getElementsByTagName("Capacidad").item(0).getTextContent();
+				                  String mercancia = element.getElementsByTagName("Mercancias").item(0).getTextContent();
+				                  String aniofab = element.getElementsByTagName("Aniofab").item(0).getTextContent();
+				                  String marca = element.getElementsByTagName("Marca").item(0).getTextContent();
+				                  String modelo = element.getElementsByTagName("Modelo").item(0).getTextContent();
+				                  
+				                  NodeList precioNodeList = element.getElementsByTagName("Precio");
+				                  String precio = precioNodeList.item(0).getTextContent();
+
+				                  
+				                  
+				                  	camion = new Camion(matricula,bastidor,Integer.parseInt(precio),Integer.parseInt(serie),color,Integer.parseInt(asientos),Integer.parseInt(carga),mercancia,aniofab,marca,modelo);	
+									textArea.setText("");
+									textArea.append("Numero Matrícula : "+camion.getMat()+"\n"+"Numero Bastidor : "+camion.getNumBast()+"\n"+"Precio : "+camion.getPrecio()+ "\n" + "Serie : "+camion.getSerie()+ "\n"+"Color : "+camion.getColor()+"\n"+"Número Asientos : "+camion.getNumAsientos()+"\n"+"Capacidad de carga : "+camion.getCapacidadCarga()+"\n"+"Tipo de carga : "+camion.getTipoCarga()+"\n"+"Año Fabricación : "+camion.getAnio_fab()+"\n"+"Marca : "+camion.getMarca()+"\n"+"Modelo : "+camion.getMarca());
+									
+
+	
+				             
+				              }
+				          }
+
+				      } catch (ParserConfigurationException | SAXException | IOException r) {
+				          r.printStackTrace();
+				      }
+					
+	
+				}
+
+			}
+		});
+		BotLeerXML.setBounds(1111, 394, 89, 23);
+		contentPane.add(BotLeerXML);
+		
+		
+		
 	}
 }
