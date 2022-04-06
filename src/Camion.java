@@ -4,7 +4,7 @@ public class Camion {
 	private String Mat;
 	private String NumBast;
 	private int Precio;
-	private int Serie;
+	
 	private String color;
 	private int numAsientos;
 	private int capacidadCarga ;
@@ -13,11 +13,11 @@ public class Camion {
 	private String marca;
 	private String Modelo;
 	
-	public Camion(String mat , String numbast , int precio , int serie , String color , int numasientos , int capacidad , String tipocarga , String aniofab , String marca , String modelo) {
+	public Camion(String mat , String numbast , int precio ,  String color , int numasientos , int capacidad , String tipocarga , String aniofab , String marca , String modelo) {
 		this.Mat = mat;
 		this.NumBast = numbast;
 		this.Precio = precio;
-		this.Serie = serie;
+		
 		this.color = color;
 		this.numAsientos = numasientos;
 		this.capacidadCarga = capacidad;
@@ -76,13 +76,7 @@ public class Camion {
 		Precio = precio;
 	}
 
-	public int getSerie() {
-		return Serie;
-	}
 
-	public void setSerie(int serie) {
-		Serie = serie;
-	}
 
 	public String getColor() {
 		return color;

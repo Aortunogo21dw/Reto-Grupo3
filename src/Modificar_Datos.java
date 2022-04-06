@@ -45,6 +45,19 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.xml.XMLConstants;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 
 public class Modificar_Datos extends JFrame {
@@ -53,7 +66,6 @@ public class Modificar_Datos extends JFrame {
 	private JTextField matricula;
 	private JTextField bastidor;
 	private JTextField precio;
-	private JTextField serie;
 	private String url = "jdbc:mysql://localhost:3306/concesionario2";
 	private String userName = "root";
 	private String password = "root";
@@ -72,7 +84,7 @@ public class Modificar_Datos extends JFrame {
 	private JTextField NumPuertasT;
 	private JTextField Fecha1;
 	private JTextField Fecha2;
-	private static String FILENAME = "";
+	private JTextField colorField;
 
 	/**
 	 * Launch the application.
@@ -112,12 +124,8 @@ public class Modificar_Datos extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnVolverMenu.setBounds(604, 458, 218, 23);
+		btnVolverMenu.setBounds(361, 424, 218, 23);
 		contentPane.add(btnVolverMenu);
-		
-		JLabel lblNewLabel_1_3 = new JLabel("Serie :");
-		lblNewLabel_1_3.setBounds(54, 126, 150, 14);
-		contentPane.add(lblNewLabel_1_3);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("Precio :");
 		lblNewLabel_1_2.setBounds(54, 101, 150, 14);
@@ -154,12 +162,6 @@ public class Modificar_Datos extends JFrame {
 		precio.setBounds(212, 98, 86, 20);
 		contentPane.add(precio);
 		
-		serie = new JTextField();
-		serie.setEnabled(false);
-		serie.setColumns(10);
-		serie.setBounds(212, 123, 86, 20);
-		contentPane.add(serie);
-		
 		
 		
 		JTextArea textArea = new JTextArea();
@@ -171,71 +173,71 @@ public class Modificar_Datos extends JFrame {
 
 		Asientos = new JTextField();
 		Asientos.setEnabled(false);
-		Asientos.setBounds(212, 173, 86, 20);
+		Asientos.setBounds(212, 147, 86, 20);
 		contentPane.add(Asientos);
 		Asientos.setColumns(10);
 		
 		CapacidadCarga = new JTextField();
 		CapacidadCarga.setEnabled(false);
-		CapacidadCarga.setBounds(212, 198, 86, 20);
+		CapacidadCarga.setBounds(212, 172, 86, 20);
 		contentPane.add(CapacidadCarga);
 		CapacidadCarga.setColumns(10);
 		
 		Mercancia = new JTextField();
 		Mercancia.setEnabled(false);
-		Mercancia.setBounds(212, 223, 86, 20);
+		Mercancia.setBounds(212, 196, 86, 20);
 		contentPane.add(Mercancia);
 		Mercancia.setColumns(10);
 		
 		CapacidadMaletero = new JTextField();
 		CapacidadMaletero.setEnabled(false);
-		CapacidadMaletero.setBounds(212, 248, 86, 20);
+		CapacidadMaletero.setBounds(212, 221, 86, 20);
 		contentPane.add(CapacidadMaletero);
 		CapacidadMaletero.setColumns(10);
 		
 		JLabel lblNewLabel_8 = new JLabel("Marca :");
-		lblNewLabel_8.setBounds(54, 276, 108, 14);
+		lblNewLabel_8.setBounds(54, 249, 108, 14);
 		contentPane.add(lblNewLabel_8);
 		
 		JLabel lblNewLabel_8_1 = new JLabel("Modelo :");
-		lblNewLabel_8_1.setBounds(54, 302, 108, 14);
+		lblNewLabel_8_1.setBounds(54, 273, 108, 14);
 		contentPane.add(lblNewLabel_8_1);
 		
 		JLabel lblNewLabel_9 = new JLabel("A\u00F1o Fabricaci\u00F3n :");
-		lblNewLabel_9.setBounds(54, 327, 150, 14);
+		lblNewLabel_9.setBounds(54, 298, 150, 14);
 		contentPane.add(lblNewLabel_9);
 		
 		Marca = new JTextField();
 		Marca.setEnabled(false);
-		Marca.setBounds(212, 273, 86, 20);
+		Marca.setBounds(212, 246, 86, 20);
 		contentPane.add(Marca);
 		Marca.setColumns(10);
 		
 		Modelo = new JTextField();
 		Modelo.setEnabled(false);
-		Modelo.setBounds(212, 299, 86, 20);
+		Modelo.setBounds(212, 270, 86, 20);
 		contentPane.add(Modelo);
 		Modelo.setColumns(10);
 		
 		AnioFab = new JTextField();
 		AnioFab.setEnabled(false);
-		AnioFab.setBounds(212, 324, 86, 20);
+		AnioFab.setBounds(212, 295, 86, 20);
 		contentPane.add(AnioFab);
 		AnioFab.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("NumPuertas :");
-		lblNewLabel_3.setBounds(54, 352, 108, 14);
+		lblNewLabel_3.setBounds(54, 325, 108, 14);
 		contentPane.add(lblNewLabel_3);
 		
 		NumPuertasT = new JTextField();
 		NumPuertasT.setEnabled(false);
-		NumPuertasT.setBounds(212, 349, 86, 20);
+		NumPuertasT.setBounds(212, 322, 86, 20);
 		contentPane.add(NumPuertasT);
 		NumPuertasT.setColumns(10);
 		
 		ColorText = new JTextField();
 		ColorText.setEnabled(false);
-		ColorText.setBounds(212, 148, 86, 20);
+		ColorText.setBounds(212, 123, 86, 20);
 		contentPane.add(ColorText);
 		ColorText.setColumns(10);
 		
@@ -255,18 +257,16 @@ public class Modificar_Datos extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if (SelecCoche.isEnabled() == true) {
-					coche =	new Coche(matricula.getText(),bastidor.getText(),Integer.parseInt(precio.getText()),serie.getText(),ColorText.getText(),Integer.parseInt(Asientos.getText()),Integer.parseInt(NumPuertasT.getText()),Integer.parseInt(CapacidadMaletero.getText()),AnioFab.getText(),Marca.getText(),Modelo.getText());
+					coche =	new Coche(matricula.getText(),bastidor.getText(),Integer.parseInt(precio.getText()),ColorText.getText(),Integer.parseInt(Asientos.getText()),Integer.parseInt(NumPuertasT.getText()),Integer.parseInt(CapacidadMaletero.getText()),AnioFab.getText(),Marca.getText(),Modelo.getText());
 					textArea.setText("");
-					textArea.append("Numero Matrícula : "+coche.getMat()+"\n"+"Numero Bastidor : "+coche.getNumBast()+"\n"+"Precio : "+coche.getPrecio()+ "\n" + "Serie : "+coche.getSerie()+ "\n"+"Color : "+coche.getColor()+"\n"+"Número Asientos : "+coche.getNumAsientos()+"\n"+"Número de Puertas : "+coche.getNumPuertas()+"\n"+"Capacidad maletero : "+coche.getCapacidadMaletero()+"\n"+"Año Fabricación : "+coche.getAniofab()+"\n"+"Marca : "+coche.getMarca()+"\n"+"Modelo : "+coche.getModelo());
+					textArea.append("Numero Matrícula : "+coche.getMat()+"\n"+"Numero Bastidor : "+coche.getNumBast()+"\n"+"Precio : "+coche.getPrecio()+  "\n"+"Color : "+coche.getColor()+"\n"+"Número Asientos : "+coche.getNumAsientos()+"\n"+"Número de Puertas : "+coche.getNumPuertas()+"\n"+"Capacidad maletero : "+coche.getCapacidadMaletero()+"\n"+"Año Fabricación : "+coche.getAniofab()+"\n"+"Marca : "+coche.getMarca()+"\n"+"Modelo : "+coche.getModelo());
 					}else if(SelectCamion.isEnabled() == true) {
-					camion = new Camion(matricula.getText(),bastidor.getText(),Integer.parseInt(precio.getText()),Integer.parseInt(serie.getText()),ColorText.getText(),Integer.parseInt(Asientos.getText()),Integer.parseInt(CapacidadCarga.getText()),Mercancia.getText(),AnioFab.getText(),Marca.getText(),Modelo.getText());	
+					camion = new Camion(matricula.getText(),bastidor.getText(),Integer.parseInt(precio.getText()),ColorText.getText(),Integer.parseInt(Asientos.getText()),Integer.parseInt(CapacidadCarga.getText()),Mercancia.getText(),AnioFab.getText(),Marca.getText(),Modelo.getText());	
 					textArea.setText("");
-					textArea.append("Numero Matrícula : "+camion.getMat()+"\n"+"Numero Bastidor : "+camion.getNumBast()+"\n"+"Precio : "+camion.getPrecio()+ "\n" + "Serie : "+camion.getSerie()+ "\n"+"Color : "+camion.getColor()+"\n"+"Número Asientos : "+camion.getNumAsientos()+"\n"+"Capacidad de carga : "+camion.getCapacidadCarga()+"\n"+"Tipo de carga : "+camion.getTipoCarga()+"\n"+"Año Fabricación : "+camion.getAnio_fab()+"\n"+"Marca : "+camion.getMarca()+"\n"+"Modelo : "+camion.getMarca());
+					textArea.append("Numero Matrícula : "+camion.getMat()+"\n"+"Numero Bastidor : "+camion.getNumBast()+"\n"+"Precio : "+camion.getPrecio()+ "\n" +"Color : "+camion.getColor()+"\n"+"Número Asientos : "+camion.getNumAsientos()+"\n"+"Capacidad de carga : "+camion.getCapacidadCarga()+"\n"+"Tipo de carga : "+camion.getTipoCarga()+"\n"+"Año Fabricación : "+camion.getAnio_fab()+"\n"+"Marca : "+camion.getMarca()+"\n"+"Modelo : "+camion.getMarca());
 					}
 					
-					 if(bastidor.getText().equals("") && serie.getText().equals("") && matricula.getText().equals("") && precio.getText().equals("")) {
-							throw new Exception ("Error , no puedes dejar los campos vacíos");
-						}
+					 
 					
 					
 								
@@ -296,11 +296,11 @@ public class Modificar_Datos extends JFrame {
 		contentPane.add(BotGuardar);
 		
 		
-		
 		/**
-		 * Borra un dato de la tabla de mysql , establece la conexion y después envía y ejecuta el comando
+		 * Botón para vender coches , símplemente borra entradas de la base de datos , borra únicamente entrada de la tabla del vehículo correspondiente
+		 * no borra entradas en serie por si acaso hay algún otro vehículo que la comparta;
 		 */
-		
+	
 		
 		
 		JButton BotVender = new JButton("Vender");
@@ -311,20 +311,15 @@ public class Modificar_Datos extends JFrame {
 				try {
 					Connection conn = DriverManager.getConnection(url,userName,password);
 					if(SelectCamion.isSelected() == true) {
-					String sql = "delete from camion where Matricula = '"+camion.getMat()+"'" ; //Ejecuta comando en mysql
+					String sql = "delete from camion where Matricula = '"+camion.getMat()+"'" ; 
 					PreparedStatement ps = conn.prepareStatement(sql);
 					ps.execute(sql);
-					String sql2 = "delete from serie where numSerie = '"+camion.getSerie()+"'" ; //Ejecuta comando en mysql
-					PreparedStatement ps2 = conn.prepareStatement(sql2);
-					ps2.execute(sql2);
+					
 					conn.close();
 					}else if(SelecCoche.isSelected() == true) {
-					String sql = "delete from coche where Matricula = '"+coche.getMat()+"'" ; //Ejecuta comando en mysql
+					String sql = "delete from coche where Matricula = '"+coche.getMat()+"'" ; 
 					PreparedStatement ps = conn.prepareStatement(sql);
 					ps.execute(sql);
-					String sql2 = "delete from serie where numSerie = '"+coche.getSerie()+"'" ; //Ejecuta comando en mysql
-					PreparedStatement ps2 = conn.prepareStatement(sql2);
-					ps2.execute(sql2);
 					conn.close();
 					}
 					
@@ -348,7 +343,9 @@ public class Modificar_Datos extends JFrame {
 		contentPane.add(BotVender);
 		
 		
-		//Botón para modificar datos en mysql.
+		/**
+		 * Modifica datos en la base de datos , puede cambiar cualquier dato excepto los de la tabla de serie.
+		 */
 		
 		JButton BotModificar = new JButton("Modificar");
 		BotModificar.addActionListener(new ActionListener() {
@@ -400,7 +397,7 @@ public class Modificar_Datos extends JFrame {
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_1_3_1 = new JLabel("Color :");
-		lblNewLabel_1_3_1.setBounds(54, 151, 156, 14);
+		lblNewLabel_1_3_1.setBounds(54, 126, 156, 14);
 		contentPane.add(lblNewLabel_1_3_1);
 		
 		
@@ -422,17 +419,17 @@ public class Modificar_Datos extends JFrame {
 		
 		
 		
-		//Se crea modelo para la tabla nueva.	
+		
 		DefaultTableModel model = new DefaultTableModel();
 		
 		
 		
 		
-		//Se crea tabla nueva.
+		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-		//Se establece modelo para la tabla.
+		
 		table.setModel(model);
 		table.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null), null));
 		
@@ -441,7 +438,9 @@ public class Modificar_Datos extends JFrame {
 		
 		
 		
-		
+		/**
+		 * Botón para actualizar , cada vez que lo pulsas te saca si hay algún cambio en la tabla.
+		 */
 		
 		
 		
@@ -452,13 +451,9 @@ public class Modificar_Datos extends JFrame {
 				try {
 					Connection conn = DriverManager.getConnection(url,userName,password);
 					z=0;
-					if(SelecCoche.isEnabled() == true) {
-					
-					String sql = "select * from coche";
-					String sql2 = "select * from serie";
+					if(SelecCoche.isSelected() == true) {
+					String sql = "select coche.*,serie.modelo,serie.marca,serie.añoFabricacion from coche inner join serie where coche.numSerie = serie.numSerie;";
 					PreparedStatement ps = conn.prepareStatement(sql);
-					PreparedStatement ps2 = conn.prepareStatement(sql2);
-					ResultSet rs2 = ps2.executeQuery();
 					ResultSet rs = ps.executeQuery();
 					String Matricula = "";
 					String NumBastidor = "";
@@ -474,32 +469,29 @@ public class Modificar_Datos extends JFrame {
 					
 					
 					model.setRowCount(0);
-					while(rs.next() && rs2.next()) {
+					while(rs.next()) {
 						Matricula = rs.getString("matricula");
 						NumBastidor = rs.getString("numBastidor");
 						Color = rs.getString("Color");
-						Serie1 = rs.getInt("numserie");
+						Serie1 = rs.getInt("numSerie");
 						Precio1 = rs.getInt("precio");
 						numAsientos =rs.getInt("numAsientos");
 						numPuertas =rs.getInt("numPuertas");
 						capacidadMaletero =rs.getInt("capacidadMaletero");
-						modelo = rs2.getString("modelo");
-						marca = rs2.getString("marca");
-						anio_fab = rs2.getInt("añoFabricacion");
+						modelo = rs.getString("modelo");
+						marca = rs.getString("marca");
+						anio_fab = rs.getInt("añoFabricacion");
 						model.addRow(new Object[] {Matricula,NumBastidor,Color,Precio1,Serie1,numAsientos,numPuertas,capacidadMaletero,modelo,marca,anio_fab});
 						
 						
 					
 					}conn.close();
 					
-					}else if(SelectCamion.isEnabled() == true) {
+					}else if(SelectCamion.isSelected() == true) {
 						
-						String sql2 = "select * from serie";
-						String sql = "select * from camion";
+						String sql = "select camion.*,serie.modelo,serie.marca,serie.añoFabricacion from camion  inner join serie where camion.numSerie = serie.numSerie;";
 						PreparedStatement ps = conn.prepareStatement(sql);
-						PreparedStatement ps2 = conn.prepareStatement(sql2);
 						ResultSet rs = ps.executeQuery();
-						ResultSet rs2 = ps2.executeQuery();
 						String Matricula = "";
 						String NumBastidor = "";
 						String Color = "";
@@ -514,7 +506,7 @@ public class Modificar_Datos extends JFrame {
 						
 						
 						model.setRowCount(0);
-						while(rs.next() && rs2.next()) {
+						while(rs.next()) {
 							Matricula = rs.getString("Matricula");
 							NumBastidor = rs.getString("NumBastidor");
 							Color = rs.getString("Color");
@@ -523,9 +515,9 @@ public class Modificar_Datos extends JFrame {
 							numAsientos = rs.getInt("numAsientos");
 							TipoMercancia = rs.getString("tipoMercancia");
 							capacidadCarga = rs.getInt("carga");
-							modelo = rs2.getString("modelo");
-							marca = rs2.getString("marca");
-							anio_fab = rs2.getInt("añoFabricacion");
+							modelo = rs.getString("modelo");
+							marca = rs.getString("marca");
+							anio_fab = rs.getInt("añoFabricacion");
 							model.addRow(new Object[] {Matricula,NumBastidor,Color,Precio,Serie,numAsientos,capacidadCarga,TipoMercancia,modelo,marca,anio_fab});
 							
 						
@@ -546,11 +538,11 @@ public class Modificar_Datos extends JFrame {
 		
 		
 		
-		
-		
-		
-		
-		JButton BotStock = new JButton("Mostrar veh\u00EDculos en stock");
+		/**
+		 * Muestra vehículos en stock , está activado solo cuando se selecciona una de las dos opciones , camion o coche. Muestra los vehículos en Stock , se reinicia con el botón limpiar;
+		 */
+	
+		JButton BotStock = new JButton("Mostrar veh\u00EDculos en stock"); 
 		if(SelecCoche.isSelected() == false && SelectCamion.isSelected() == false ) {
 			BotStock.setEnabled(false);
 			BotGuardar.setEnabled(false);
@@ -566,13 +558,10 @@ public class Modificar_Datos extends JFrame {
 				try {
 					Connection conn = DriverManager.getConnection(url,userName,password);
 					
-					if(SelecCoche.isEnabled() == true) {
-					String sql = "select * from coche";
-					String sql2 = "select * from serie";
+					if(SelecCoche.isSelected() == true) {
+					String sql = "select coche.*,serie.modelo,serie.marca,serie.añoFabricacion from coche inner join serie where coche.numSerie = serie.numSerie;";
 					PreparedStatement ps = conn.prepareStatement(sql);
-					PreparedStatement ps2 = conn.prepareStatement(sql2);
 					ResultSet rs = ps.executeQuery();
-					ResultSet rs2 = ps2.executeQuery();
 					String Matricula = "";
 					String NumBastidor = "";
 					String Color = "";
@@ -588,18 +577,18 @@ public class Modificar_Datos extends JFrame {
 					
 					if(z<1) {
 					model.setRowCount(0);
-					while(rs.next() && rs2.next()) {
+					while(rs.next()) {
 						Matricula = rs.getString("matricula");
 						NumBastidor = rs.getString("numBastidor");
 						Color = rs.getString("Color");
-						Serie1 = rs.getInt("numserie");
+						Serie1 = rs.getInt("numSerie");
 						Precio1 = rs.getInt("precio");
 						numAsientos =rs.getInt("numAsientos");
 						numPuertas =rs.getInt("numPuertas");
 						capacidadMaletero =rs.getInt("capacidadMaletero");
-						modelo = rs2.getString("modelo");
-						marca = rs2.getString("marca");
-						anio_fab = rs2.getInt("añoFabricacion");
+						modelo = rs.getString("modelo");
+						marca = rs.getString("marca");
+						anio_fab = rs.getInt("añoFabricacion");
 						model.addRow(new Object[] {Matricula,NumBastidor,Color,Precio1,Serie1,numAsientos,numPuertas,capacidadMaletero,modelo,marca,anio_fab});
 						
 					}z++;
@@ -607,13 +596,11 @@ public class Modificar_Datos extends JFrame {
 					else {
 						JOptionPane.showMessageDialog(null, "Ya se esán mostrando los vehículos en stock","Error",
 						JOptionPane.ERROR_MESSAGE);	
-					}}else if(SelectCamion.isEnabled() == true) {
-						String sql = "select * from camion";
-						String sql2 = "select * from serie";
+						
+					}}else if(SelectCamion.isSelected() == true) {
+						String sql = "select camion.*,serie.modelo,serie.marca,serie.añoFabricacion from camion  inner join serie where camion.numSerie = serie.numSerie;";
 						PreparedStatement ps = conn.prepareStatement(sql);
-						PreparedStatement ps2 = conn.prepareStatement(sql2);
 						ResultSet rs = ps.executeQuery();
-						ResultSet rs2 = ps2.executeQuery();
 						String Matricula = "";
 						String NumBastidor = "";
 						String Color = "";
@@ -629,7 +616,7 @@ public class Modificar_Datos extends JFrame {
 						
 						if(z<1) {
 						model.setRowCount(0);
-						while(rs.next() && rs2.next()) {
+						while(rs.next()) {
 							Matricula = rs.getString("Matricula");
 							NumBastidor = rs.getString("NumBastidor");
 							Color = rs.getString("Color");
@@ -638,9 +625,9 @@ public class Modificar_Datos extends JFrame {
 							numAsientos = rs.getInt("numAsientos");
 							TipoMercancia = rs.getString("tipoMercancia");
 							capacidadCarga = rs.getInt("carga");
-							modelo = rs2.getString("modelo");
-							marca = rs2.getString("marca");
-							anio_fab = rs2.getInt("añoFabricacion");
+							modelo = rs.getString("modelo");
+							marca = rs.getString("marca");
+							anio_fab = rs.getInt("añoFabricacion");
 							model.addRow(new Object[] {Matricula,NumBastidor,Color,Precio,Serie,numAsientos,capacidadCarga,TipoMercancia,modelo,marca,anio_fab});
 							
 						}z++;
@@ -683,28 +670,150 @@ public class Modificar_Datos extends JFrame {
 		
 		
 		
+		/**
+		 * Botón para comprar , comprueba si existe la serie y si no asigna una nueva.
+		 */
+		
 		BotComprar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
+				boolean existe = false;
 				try {
 					Connection conn = DriverManager.getConnection(url,userName,password);
 					
 					if(SelectCamion.isSelected() == true) {
-					String sql = "insert into camion values('"+camion.getNumBast()+"',"+"'"+camion.getCapacidadCarga()+"',"+"'"+camion.getTipoCarga()+"',"+"'"+camion.getMat()+"',"+"'"+camion.getColor()+"' ,"+"'"+camion.getNumAsientos()+"' ,"+"'"+camion.getPrecio()+"' ,"+"'"+camion.getSerie()+"');";
+					String sq2l = "SET FOREIGN_KEY_CHECKS=0";
+					PreparedStatement ps2 = conn.prepareStatement(sq2l);
+					ps2.execute(sq2l);
+					
+					String sql3 = "select * from serie";
+					PreparedStatement ps3 = conn.prepareStatement(sql3);
+					ResultSet rs = ps3.executeQuery();
+					String modelotemp = "";
+					String marcatemp = "";
+					String aniotemp = "";
+					int numSerieTemp = 0;
+					
+					while(rs.next()) {
+						modelotemp = rs.getString("modelo");
+						marcatemp = rs.getString("marca");
+						aniotemp = rs.getString("añoFabricacion");
+						if (camion.getModelo().equalsIgnoreCase(modelotemp) && camion.getMarca().equalsIgnoreCase(marcatemp) && camion.getAnio_fab().equalsIgnoreCase(aniotemp)) {
+							existe = true;
+							numSerieTemp = rs.getInt("numSerie");
+							break;
+						}else {
+							existe = false;
+						}
+						
+					}
+					
+					
+					if(existe == false) {
+						
+					String sql ="insert into serie values(null,'"+camion.getModelo()+"','"+camion.getMarca()+"',"+camion.getAnio_fab()+")";
 					PreparedStatement ps = conn.prepareStatement(sql);
 					ps.execute(sql);
-					sql ="insert into serie values("+camion.getSerie()+",'"+camion.getModelo()+"','"+camion.getMarca()+"',"+camion.getAnio_fab()+")";
+					sql3 = "select * from serie";
+					ps3 = conn.prepareStatement(sql3);
+					rs = ps3.executeQuery();
+	
+					while(rs.next()) {
+						modelotemp = rs.getString("modelo");
+						marcatemp = rs.getString("marca");
+						aniotemp = rs.getString("añoFabricacion");
+						if (camion.getModelo().equalsIgnoreCase(modelotemp) && camion.getMarca().equalsIgnoreCase(marcatemp) && camion.getAnio_fab().equalsIgnoreCase(aniotemp)) {
+
+							numSerieTemp = rs.getInt("numSerie");
+							break;
+						}}
+					
+					sql = "insert into camion values('"+camion.getNumBast()+"',"+"'"+camion.getCapacidadCarga()+"',"+"'"+camion.getTipoCarga()+"',"+"'"+camion.getMat()+"',"+"'"+camion.getColor()+"' ,"+"'"+camion.getNumAsientos()+"' ,"+"'"+camion.getPrecio()+"','"+numSerieTemp+"');";
 					ps.execute(sql);
 					
-					conn.close();
-					}else if(SelecCoche.isSelected() == true) {
-					String sql = "insert into coche values('"+coche.getNumBast()+"',"+"'"+coche.getNumPuertas()+"',"+"'"+coche.getCapacidadMaletero()+"',"+"'"+coche.getMat()+"',"+"'"+coche.getColor()+"' ,"+"'"+coche.getNumAsientos()+"' ,"+"'"+coche.getPrecio()+"' ,"+"'"+coche.getSerie()+"')";
+					}else {
+						
+					String sql = "insert into camion values('"+camion.getNumBast()+"',"+"'"+camion.getCapacidadCarga()+"',"+"'"+camion.getTipoCarga()+"',"+"'"+camion.getMat()+"',"+"'"+camion.getColor()+"' ,"+"'"+camion.getNumAsientos()+"' ,"+"'"+camion.getPrecio()+"','"+numSerieTemp+"');";
 					PreparedStatement ps = conn.prepareStatement(sql);
 					ps.execute(sql);
-					sql ="insert into serie values("+coche.getSerie()+",'"+coche.getModelo()+"','"+coche.getMarca()+"',"+coche.getAniofab()+")";
-					ps.execute(sql);
+						
+						
+					}
+					
+					
 					conn.close();
 					}
+					
+					
+					
+					else if(SelecCoche.isSelected() == true) {
+						String sq2l = "SET FOREIGN_KEY_CHECKS=0";
+						PreparedStatement ps2 = conn.prepareStatement(sq2l);
+						ps2.execute(sq2l);
+						
+						String sql3 = "select * from serie";
+						PreparedStatement ps3 = conn.prepareStatement(sql3);
+						ResultSet rs = ps3.executeQuery();
+						String modelotemp = "";
+						String marcatemp = "";
+						String aniotemp = "";
+						int numSerieTemp = 0;
+						
+						while(rs.next()) {
+							modelotemp = rs.getString("modelo");
+							marcatemp = rs.getString("marca");
+							aniotemp = rs.getString("añoFabricacion");
+							if (coche.getModelo().equalsIgnoreCase(modelotemp) && coche.getMarca().equalsIgnoreCase(marcatemp) && coche.getAniofab().equalsIgnoreCase(aniotemp)) {
+								existe = true;
+								numSerieTemp = rs.getInt("numSerie");
+								break;
+							}else {
+								existe = false;
+							}
+							
+						}
+						
+						
+							
+						if(existe == false) {
+							String sql ="insert into serie values(null,'"+coche.getModelo()+"','"+coche.getMarca()+"',"+coche.getAniofab()+")";
+							PreparedStatement ps = conn.prepareStatement(sql);
+							ps.execute(sql);
+							sql3 = "select * from serie";
+							ps3 = conn.prepareStatement(sql3);
+							rs = ps3.executeQuery();
+			
+							while(rs.next()) {
+								modelotemp = rs.getString("modelo");
+								marcatemp = rs.getString("marca");
+								aniotemp = rs.getString("añoFabricacion");
+								if (coche.getModelo().equalsIgnoreCase(modelotemp) && coche.getMarca().equalsIgnoreCase(marcatemp) && coche.getAniofab().equalsIgnoreCase(aniotemp)) {
+
+									numSerieTemp = rs.getInt("numSerie");
+									break;
+								}}
+							
+							sql = "insert into coche values('"+coche.getNumBast()+"',"+"'"+coche.getNumPuertas()+"',"+"'"+coche.getCapacidadMaletero()+"',"+"'"+coche.getMat()+"',"+"'"+coche.getColor()+"' ,"+"'"+coche.getNumAsientos()+"' ,"+"'"+coche.getPrecio()+"','"+numSerieTemp+"');";
+							ps.execute(sql);
+						
+						}else {
+							
+						String sql = "insert into coche values('"+coche.getNumBast()+"',"+"'"+coche.getNumPuertas()+"',"+"'"+coche.getCapacidadMaletero()+"',"+"'"+coche.getMat()+"',"+"'"+coche.getColor()+"' ,"+"'"+coche.getNumAsientos()+"' ,"+"'"+coche.getPrecio()+"','"+numSerieTemp+"');";
+						PreparedStatement ps = conn.prepareStatement(sql);
+						ps.execute(sql);
+							
+							
+						}
+						
+						
+						conn.close();
+						}
+						
+						
+						
+						
+					
+					
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -713,12 +822,17 @@ public class Modificar_Datos extends JFrame {
 			}
 		});
 		
-		
-		
+	
 		
 		
 		BotComprar.setBounds(546, 309, 89, 23);
 		contentPane.add(BotComprar);
+		
+		
+		
+		/**
+		 * Uno de los múltiples botones para limpiar pantalla.
+		 */
 		
 		JButton btnNewButton_7 = new JButton("Limpiar");
 		btnNewButton_7.addActionListener(new ActionListener() {
@@ -750,7 +864,7 @@ public class Modificar_Datos extends JFrame {
 					matricula.setEnabled(true);
 					bastidor.setEnabled(true);
 					precio.setEnabled(true);
-					serie.setEnabled(true);
+					
 					Asientos.setEnabled(true);
 					CapacidadCarga.setEnabled(true);
 					Mercancia.setEnabled(true);
@@ -772,7 +886,7 @@ public class Modificar_Datos extends JFrame {
 					matricula.setText("");
 					bastidor.setText("");
 					precio.setText("");
-					serie.setText("");
+					
 					Asientos.setText("");
 					CapacidadCarga.setText("");
 					Mercancia.setText("");
@@ -791,7 +905,7 @@ public class Modificar_Datos extends JFrame {
 					matricula.setEnabled(false);
 					bastidor.setEnabled(false);
 					precio.setEnabled(false);
-					serie.setEnabled(false);
+				
 					Asientos.setEnabled(false);
 					CapacidadCarga.setEnabled(false);
 					Mercancia.setEnabled(false);
@@ -819,7 +933,7 @@ public class Modificar_Datos extends JFrame {
 					matricula.setEnabled(true);
 					bastidor.setEnabled(true);
 					precio.setEnabled(true);
-					serie.setEnabled(true);
+					
 					Asientos.setEnabled(true);
 					CapacidadCarga.setEnabled(false);
 					Mercancia.setEnabled(false);
@@ -841,7 +955,7 @@ public class Modificar_Datos extends JFrame {
 					matricula.setText("");
 					bastidor.setText("");
 					precio.setText("");
-					serie.setText("");
+				
 					Asientos.setText("");
 					CapacidadCarga.setText("");
 					Mercancia.setText("");
@@ -859,7 +973,7 @@ public class Modificar_Datos extends JFrame {
 					matricula.setEnabled(false);
 					bastidor.setEnabled(false);
 					precio.setEnabled(false);
-					serie.setEnabled(false);
+				
 					Asientos.setEnabled(false);
 					CapacidadCarga.setEnabled(false);
 					Mercancia.setEnabled(false);
@@ -877,27 +991,27 @@ public class Modificar_Datos extends JFrame {
 		});
 		
 		
-		SelecCoche.setBounds(205, 458, 150, 23);
+		SelecCoche.setBounds(193, 424, 150, 23);
 		contentPane.add(SelecCoche);
 		
 		
-		SelectCamion.setBounds(54, 458, 149, 23);
+		SelectCamion.setBounds(42, 424, 149, 23);
 		contentPane.add(SelectCamion);
 		
 		JLabel lblNewLabel_4 = new JLabel("N\u00FAmero Asientos :");
-		lblNewLabel_4.setBounds(54, 176, 142, 14);
+		lblNewLabel_4.setBounds(54, 150, 142, 14);
 		contentPane.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Capacidad Carga :");
-		lblNewLabel_5.setBounds(54, 201, 127, 14);
+		lblNewLabel_5.setBounds(54, 175, 127, 14);
 		contentPane.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Tipo Mercanc\u00EDa :");
-		lblNewLabel_6.setBounds(54, 226, 142, 14);
+		lblNewLabel_6.setBounds(54, 199, 142, 14);
 		contentPane.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel("Capacidad Maletero :");
-		lblNewLabel_7.setBounds(54, 251, 127, 14);
+		lblNewLabel_7.setBounds(54, 224, 127, 14);
 		contentPane.add(lblNewLabel_7);
 		
 		JButton BuscarVentas = new JButton("Buscar ventas");
@@ -931,7 +1045,9 @@ public class Modificar_Datos extends JFrame {
 		
 		
 		
-		
+		/**
+		 * Devuelve las ventas comprendidas entre dos fechas.
+		 */
 		
 		BuscarVentas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -992,63 +1108,34 @@ public class Modificar_Datos extends JFrame {
 		
 		
 		
-		BuscarVentas.setBounds(939, 348, 191, 23);
+		BuscarVentas.setBounds(939, 394, 191, 23);
 		contentPane.add(BuscarVentas);
 		
 		
-		VentasFecha.setBounds(758, 348, 175, 23);
+		VentasFecha.setBounds(758, 394, 175, 23);
 		contentPane.add(VentasFecha);
 		
 		Fecha1 = new JTextField();
-		Fecha1.setBounds(1168, 349, 86, 20);
+		Fecha1.setBounds(1168, 395, 86, 20);
 		contentPane.add(Fecha1);
 		Fecha1.setColumns(10);
 		
 		Fecha2 = new JTextField();
 		Fecha2.setColumns(10);
-		Fecha2.setBounds(1298, 349, 86, 20);
+		Fecha2.setBounds(1298, 395, 86, 20);
 		contentPane.add(Fecha2);
 		
 		JLabel lblNewLabel_10 = new JLabel("F2");
-		lblNewLabel_10.setBounds(1264, 352, 24, 14);
+		lblNewLabel_10.setBounds(1264, 398, 24, 14);
 		contentPane.add(lblNewLabel_10);
 		
 		JLabel lblNewLabel_10_1 = new JLabel("F1");
-		lblNewLabel_10_1.setBounds(1140, 352, 18, 14);
+		lblNewLabel_10_1.setBounds(1140, 398, 18, 14);
 		contentPane.add(lblNewLabel_10_1);
 		
 		Fecha1.setEnabled(false);
 		Fecha2.setEnabled(false);
-		
-		JCheckBox Leercoch = new JCheckBox("Leer coche desde xml");
-		JCheckBox Leercam = new JCheckBox("Leer camion desde xml");
-		JButton BotLeerXML = new JButton("Leer");
-		Leercoch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(Leercoch.isSelected() == true) {
-					Leercam.setEnabled(false);
-					
-				}else {
-					Leercam.setEnabled(true);
-				}
-			}
-		});
-		Leercoch.setBounds(761, 394, 156, 23);
-		contentPane.add(Leercoch);
-		
-		
-		Leercam.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(Leercam.isSelected() == true) {
-					Leercoch.setEnabled(false);
-				}else {
-					Leercoch.setEnabled(true);
-				}
-				
-			}
-		});
-		Leercam.setBounds(939, 394, 142, 23);
-		contentPane.add(Leercam);
+		JButton BotLeerXML = new JButton("Importar XML");
 		
 		
 		
@@ -1058,148 +1145,471 @@ public class Modificar_Datos extends JFrame {
 		
 		BotLeerXML.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if(Leercoch.isSelected()) {
-					
-					
-					 // Instantiate the Factory
-				      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-				      FILENAME = "filecoche.xml";
-				 
-				      try {
+				boolean existe = false;
+				   // Instantiate the Factory
+			      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			    
+			      try {
+			    	  Connection conn = DriverManager.getConnection(url,userName,password);
+			          // optional, but recommended
+			          // process XML securely, avoid attacks like XML External Entities (XXE)
+			          dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
 
-				          // optional, but recommended
-				          // process XML securely, avoid attacks like XML External Entities (XXE)
-				          dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+			          // parse XML file
+			          DocumentBuilder db = dbf.newDocumentBuilder();
 
-				          // parse XML file
-				          DocumentBuilder db = dbf.newDocumentBuilder();
+			          Document doc = db.parse(new File("C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/filecamion2.xml"));
 
-				          Document doc = db.parse(new File(FILENAME));
+			          // optional, but recommended
+			          // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
+			          doc.getDocumentElement().normalize();
 
-				          // optional, but recommended
-				          // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
-				          doc.getDocumentElement().normalize();
+			     
+			          
+			          NodeList list = doc.getElementsByTagName("coche");
 
-				        
-				          // get <staff>
-				          NodeList list = doc.getElementsByTagName("Coche");
+			          for (int temp = 0; temp < list.getLength(); temp++) {
 
-				          for (int temp = 0; temp < list.getLength(); temp++) {
+			              Node node = list.item(temp);
 
-				              Node node = list.item(temp);
+			              if (node.getNodeType() == Node.ELEMENT_NODE) {
 
-				              if (node.getNodeType() == Node.ELEMENT_NODE) {
+			                  Element element = (Element) node;
 
-				                  Element element = (Element) node;
-
-				                  // get staff's attribute
-				                 
-
-				                  // get text
-				                  String matricula = element.getElementsByTagName("Matricula").item(0).getTextContent();
-				                  String asientos = element.getElementsByTagName("Asientos").item(0).getTextContent();
-				                  String color = element.getElementsByTagName("Color").item(0).getTextContent();
-				                  String bastidor = element.getElementsByTagName("Bastidor").item(0).getTextContent();
-				                  String serie = element.getElementsByTagName("Serie").item(0).getTextContent();
-				                  String puertas = element.getElementsByTagName("Puertas").item(0).getTextContent();
-				                  String maletero = element.getElementsByTagName("Maletero").item(0).getTextContent();
-				                  String aniofab = element.getElementsByTagName("Aniofab").item(0).getTextContent();
-				                  String marca = element.getElementsByTagName("Marca").item(0).getTextContent();
-				                  String modelo = element.getElementsByTagName("Modelo").item(0).getTextContent();
-				                  
-				                  NodeList precioNodeList = element.getElementsByTagName("Precio");
-				                  String precio = precioNodeList.item(0).getTextContent();
-
-				                  
-				                  
-				                  
-				                  coche =new Coche(matricula,bastidor,Integer.parseInt(precio),serie,color,Integer.parseInt(asientos),Integer.parseInt(puertas),Integer.parseInt(maletero),aniofab,marca,modelo);
-									textArea.setText("");
-									textArea.append("Numero Matrícula : "+coche.getMat()+"\n"+"Numero Bastidor : "+coche.getNumBast()+"\n"+"Precio : "+coche.getPrecio()+ "\n" + "Serie : "+coche.getSerie()+ "\n"+"Color : "+coche.getColor()+"\n"+"Número Asientos : "+coche.getNumAsientos()+"\n"+"Número de Puertas : "+coche.getNumPuertas()+"\n"+"Capacidad maletero : "+coche.getCapacidadMaletero()+"\n"+"Año Fabricación : "+coche.getAniofab()+"\n"+"Marca : "+coche.getMarca()+"\n"+"Modelo : "+coche.getModelo());
-				                  
-				              }
-				          }
-
-				      } catch (ParserConfigurationException | SAXException | IOException r) {
-				          r.printStackTrace();
-				      }
-					
-					
-				}else {
-					
-					 // Instantiate the Factory
-				      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-				      FILENAME ="filecamion.xml";
-				 
-				      try {
-
-				          // optional, but recommended
-				          // process XML securely, avoid attacks like XML External Entities (XXE)
-				          dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-
-				          // parse XML file
-				          DocumentBuilder db = dbf.newDocumentBuilder();
-
-				          Document doc = db.parse(new File(FILENAME));
-
-				          // optional, but recommended
-				          // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
-				          doc.getDocumentElement().normalize();
-
-				        
-				          // get <staff>
-				          NodeList list = doc.getElementsByTagName("Camion");
-
-				          for (int temp = 0; temp < list.getLength(); temp++) {
-
-				              Node node = list.item(temp);
-
-				              if (node.getNodeType() == Node.ELEMENT_NODE) {
-
-				                  Element element = (Element) node;
-
-				                  // get staff's attribute
-				                 
-
-				                  // get text
-				                  String matricula = element.getElementsByTagName("Matricula").item(0).getTextContent();
-				                  String asientos = element.getElementsByTagName("Asientos").item(0).getTextContent();
-				                  String color = element.getElementsByTagName("Color").item(0).getTextContent();
-				                  String bastidor = element.getElementsByTagName("Bastidor").item(0).getTextContent();
-				                  String serie = element.getElementsByTagName("Serie").item(0).getTextContent();
-				                  String carga = element.getElementsByTagName("Capacidad").item(0).getTextContent();
-				                  String mercancia = element.getElementsByTagName("Mercancias").item(0).getTextContent();
-				                  String aniofab = element.getElementsByTagName("Aniofab").item(0).getTextContent();
-				                  String marca = element.getElementsByTagName("Marca").item(0).getTextContent();
-				                  String modelo = element.getElementsByTagName("Modelo").item(0).getTextContent();
-				                  
-				                  NodeList precioNodeList = element.getElementsByTagName("Precio");
-				                  String precio = precioNodeList.item(0).getTextContent();
-
-				                  
-				                  
-				                  	camion = new Camion(matricula,bastidor,Integer.parseInt(precio),Integer.parseInt(serie),color,Integer.parseInt(asientos),Integer.parseInt(carga),mercancia,aniofab,marca,modelo);	
-									textArea.setText("");
-									textArea.append("Numero Matrícula : "+camion.getMat()+"\n"+"Numero Bastidor : "+camion.getNumBast()+"\n"+"Precio : "+camion.getPrecio()+ "\n" + "Serie : "+camion.getSerie()+ "\n"+"Color : "+camion.getColor()+"\n"+"Número Asientos : "+camion.getNumAsientos()+"\n"+"Capacidad de carga : "+camion.getCapacidadCarga()+"\n"+"Tipo de carga : "+camion.getTipoCarga()+"\n"+"Año Fabricación : "+camion.getAnio_fab()+"\n"+"Marca : "+camion.getMarca()+"\n"+"Modelo : "+camion.getMarca());
+			                 
+			                  
+			                  String NumBastidor = element.getElementsByTagName("numBastidor").item(0).getTextContent();
+			                  String capacidadMaletero = element.getElementsByTagName("capacidadMaletero").item(0).getTextContent();
+			                  String numPuertas = element.getElementsByTagName("numPuertas").item(0).getTextContent();
+			                  String matricula = element.getElementsByTagName("matricula").item(0).getTextContent();
+			                  String color = element.getElementsByTagName("color").item(0).getTextContent();
+			                  String numAsientos = element.getElementsByTagName("numAsientos").item(0).getTextContent();
+			                  String precio = element.getElementsByTagName("precio").item(0).getTextContent();
+			                  String modelo = element.getElementsByTagName("modelo").item(0).getTextContent();
+			                  String marca = element.getElementsByTagName("marca").item(0).getTextContent();
+			                  String aniofab = element.getElementsByTagName("añoFabricacion").item(0).getTextContent();
+			                  
+			                  
+			                  
+			                  coche = new Coche(matricula,NumBastidor,Integer.parseInt(precio),color,Integer.parseInt(numAsientos),Integer.parseInt(numPuertas),Integer.parseInt(capacidadMaletero),aniofab,marca,modelo);
+			                  String sq2l = "SET FOREIGN_KEY_CHECKS=0";
+								PreparedStatement ps2 = conn.prepareStatement(sq2l);
+								ps2.execute(sq2l);
+								
+								String sql3 = "select * from serie";
+								PreparedStatement ps3 = conn.prepareStatement(sql3);
+								ResultSet rs = ps3.executeQuery();
+								String modelotemp = "";
+								String marcatemp = "";
+								String aniotemp = "";
+								int numSerieTemp = 0;
+								
+								while(rs.next()) {
+									modelotemp = rs.getString("modelo");
+									marcatemp = rs.getString("marca");
+									aniotemp = rs.getString("añoFabricacion");
+									if (coche.getModelo().equalsIgnoreCase(modelotemp) && coche.getMarca().equalsIgnoreCase(marcatemp) && coche.getAniofab().equalsIgnoreCase(aniotemp)) {
+										existe = true;
+										numSerieTemp = rs.getInt("numSerie");
+										break;
+									}else {
+										existe = false;
+									}
 									
-
-	
-				             
-				              }
-				          }
-
-				      } catch (ParserConfigurationException | SAXException | IOException r) {
-				          r.printStackTrace();
-				      }
+								}
+									
+								if(existe == false) {
+									String sql ="insert into serie values(null,'"+coche.getModelo()+"','"+coche.getMarca()+"',"+coche.getAniofab()+")";
+									PreparedStatement ps = conn.prepareStatement(sql);
+									ps.execute(sql);
+									sql3 = "select * from serie";
+									ps3 = conn.prepareStatement(sql3);
+									rs = ps3.executeQuery();
 					
-	
-				}
+									while(rs.next()) {
+										modelotemp = rs.getString("modelo");
+										marcatemp = rs.getString("marca");
+										aniotemp = rs.getString("añoFabricacion");
+										if (coche.getModelo().equalsIgnoreCase(modelotemp) && coche.getMarca().equalsIgnoreCase(marcatemp) && coche.getAniofab().equalsIgnoreCase(aniotemp)) {
+
+											numSerieTemp = rs.getInt("numSerie");
+											break;
+										}}
+									
+									sql = "insert into coche values('"+coche.getNumBast()+"',"+"'"+coche.getNumPuertas()+"',"+"'"+coche.getCapacidadMaletero()+"',"+"'"+coche.getMat()+"',"+"'"+coche.getColor()+"' ,"+"'"+coche.getNumAsientos()+"' ,"+"'"+coche.getPrecio()+"','"+numSerieTemp+"');";
+									ps.execute(sql);
+								
+								}else {
+									
+								String sql = "insert into coche values('"+coche.getNumBast()+"',"+"'"+coche.getNumPuertas()+"',"+"'"+coche.getCapacidadMaletero()+"',"+"'"+coche.getMat()+"',"+"'"+coche.getColor()+"' ,"+"'"+coche.getNumAsientos()+"' ,"+"'"+coche.getPrecio()+"','"+numSerieTemp+"');";
+								PreparedStatement ps = conn.prepareStatement(sql);
+								ps.execute(sql);
+									
+									
+								}
+								
+								
+						
+			                  
+			                  
+			                  
+			                  
+			                  
+			                  
+			                  
+			                  
+			                  
+			              }
+			              
+			            
+			              
+			              
+			              
+			              
+			            
+			              
+			              
+			              
+			          }
+			          
+			          
+			          
+			          
+			          list = doc.getElementsByTagName("camion");
+
+			          for (int temp = 0; temp < list.getLength(); temp++) {
+
+			              Node node = list.item(temp);
+
+			              if (node.getNodeType() == Node.ELEMENT_NODE) {
+
+			                  Element element = (Element) node;
+
+			                 
+			                 
+			                  String NumBastidor = element.getElementsByTagName("numBastidor").item(0).getTextContent();
+			                  String carga = element.getElementsByTagName("carga").item(0).getTextContent();
+			                  String TipoMercancia = element.getElementsByTagName("tipoMercancia").item(0).getTextContent();
+			                  String matricula = element.getElementsByTagName("matricula").item(0).getTextContent();
+			                  String color = element.getElementsByTagName("color").item(0).getTextContent();
+			                  String numAsientos = element.getElementsByTagName("numAsientos").item(0).getTextContent();
+			                  String precio = element.getElementsByTagName("precio").item(0).getTextContent();
+			                  String modelo = element.getElementsByTagName("modelo").item(0).getTextContent();
+			                  String marca = element.getElementsByTagName("marca").item(0).getTextContent();
+			                  String aniofab = element.getElementsByTagName("añoFabricacion").item(0).getTextContent();
+			                  
+			                  
+			                  camion = new Camion(matricula,NumBastidor,Integer.parseInt(precio),color,Integer.parseInt(numAsientos),Integer.parseInt(carga),TipoMercancia,aniofab,marca,modelo);
+			                 
+			                  
+			                  String sq2l = "SET FOREIGN_KEY_CHECKS=0";
+								PreparedStatement ps2 = conn.prepareStatement(sq2l);
+								ps2.execute(sq2l);
+								
+								String sql3 = "select * from serie";
+								PreparedStatement ps3 = conn.prepareStatement(sql3);
+								ResultSet rs = ps3.executeQuery();
+								String modelotemp = "";
+								String marcatemp = "";
+								String aniotemp = "";
+								int numSerieTemp = 0;
+								
+								while(rs.next()) {
+									modelotemp = rs.getString("modelo");
+									marcatemp = rs.getString("marca");
+									aniotemp = rs.getString("añoFabricacion");
+									if (camion.getModelo().equalsIgnoreCase(modelotemp) && camion.getMarca().equalsIgnoreCase(marcatemp) && camion.getAnio_fab().equalsIgnoreCase(aniotemp)) {
+										existe = true;
+										numSerieTemp = rs.getInt("numSerie");
+										break;
+									}else {
+										existe = false;
+									}
+									
+								}
+								
+								
+								if(existe == false) {
+									
+								String sql ="insert into serie values(null,'"+camion.getModelo()+"','"+camion.getMarca()+"',"+camion.getAnio_fab()+")";
+								PreparedStatement ps = conn.prepareStatement(sql);
+								ps.execute(sql);
+								sql3 = "select * from serie";
+								ps3 = conn.prepareStatement(sql3);
+								rs = ps3.executeQuery();
+				
+								while(rs.next()) {
+									modelotemp = rs.getString("modelo");
+									marcatemp = rs.getString("marca");
+									aniotemp = rs.getString("añoFabricacion");
+									if (camion.getModelo().equalsIgnoreCase(modelotemp) && camion.getMarca().equalsIgnoreCase(marcatemp) && camion.getAnio_fab().equalsIgnoreCase(aniotemp)) {
+
+										numSerieTemp = rs.getInt("numSerie");
+										break;
+									}}
+								
+								sql = "insert into camion values('"+camion.getNumBast()+"',"+"'"+camion.getCapacidadCarga()+"',"+"'"+camion.getTipoCarga()+"',"+"'"+camion.getMat()+"',"+"'"+camion.getColor()+"' ,"+"'"+camion.getNumAsientos()+"' ,"+"'"+camion.getPrecio()+"','"+numSerieTemp+"');";
+								ps.execute(sql);
+								
+								}else {
+									
+								String sql = "insert into camion values('"+camion.getNumBast()+"',"+"'"+camion.getCapacidadCarga()+"',"+"'"+camion.getTipoCarga()+"',"+"'"+camion.getMat()+"',"+"'"+camion.getColor()+"' ,"+"'"+camion.getNumAsientos()+"' ,"+"'"+camion.getPrecio()+"','"+numSerieTemp+"');";
+								PreparedStatement ps = conn.prepareStatement(sql);
+								ps.execute(sql);
+									
+									
+								}
+			                 
+			              }
+			              
+			            
+		  
+			          }
+			          
+			          
+			          
+			          
+			          
+			          
+			          conn.close();
+			          
+			          
+			          
+
+			      } catch (ParserConfigurationException | SAXException | IOException  | SQLException e1) {
+			         e1.printStackTrace();
+			      }
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			
 
 			}
 		});
-		BotLeerXML.setBounds(1111, 394, 89, 23);
+		
+		
+		
+		
+		BotLeerXML.setBounds(758, 458, 119, 23);
 		contentPane.add(BotLeerXML);
+		
+		JButton btnNewButton = new JButton("Exportar XML Tabla");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				//Por hacer
+				
+				
+			
+			}
+		});
+		
+		
+		btnNewButton.setBounds(1212, 458, 172, 23);
+		contentPane.add(btnNewButton);
+		
+		
+		
+		
+		/**
+		 * Devuelven características de los vehículos dependiendo del color
+		 */
+		
+		
+		
+		JCheckBox camionesColor = new JCheckBox("Mostrar Camiones por color");
+		JCheckBox cochesColor = new JCheckBox("Mostrar coches por color");
+		camionesColor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(camionesColor.isSelected() == true) {
+					cochesColor.setEnabled(false);
+				}else {
+					cochesColor.setEnabled(true);
+				}
+			}
+		});
+	
+		cochesColor.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				if(cochesColor.isSelected() == true) {
+					camionesColor.setEnabled(false);
+				}else {
+					camionesColor.setEnabled(true);
+				}
+			}
+		});
+		
+		
+		
+		cochesColor.setBounds(758, 424, 175, 23);
+		contentPane.add(cochesColor);
+		
+		
+		
+		camionesColor.setBounds(939, 424, 172, 23);
+		contentPane.add(camionesColor);
+		
+		JButton mostrar = new JButton("Mostrar");
+		mostrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Connection conn = DriverManager.getConnection(url,userName,password);
+					
+					if(cochesColor.isSelected() == true) {
+			
+					String sql = "call colorCoche('"+colorField.getText()+"')";
+					
+					PreparedStatement ps = conn.prepareStatement(sql);
+					
+					ResultSet rs = ps.executeQuery();
+					
+					String Matricula = "";
+					String NumBastidor = "";
+					String Color = "";
+					int Serie1 = 0;
+					int numAsientos = 0;
+					int numPuertas = 0;
+					int capacidadMaletero = 0;
+					int Precio1 = 0;
+					String modelo = "";
+					String marca = "";
+					int anio_fab = 0;
+					
+					
+					if(z<1) {
+					model.setRowCount(0);
+					while(rs.next() ) {
+						Matricula = rs.getString("matricula");
+						NumBastidor = rs.getString("numBastidor");
+						Color = rs.getString("Color");
+						Serie1 = rs.getInt("numSerie");
+						Precio1 = rs.getInt("precio");
+						numAsientos =rs.getInt("numAsientos");
+						numPuertas =rs.getInt("numPuertas");
+						capacidadMaletero =rs.getInt("capacidadMaletero");
+						modelo = rs.getString("modelo");
+						marca = rs.getString("marca");
+						anio_fab = rs.getInt("añoFabricacion");
+						model.addRow(new Object[] {Matricula,NumBastidor,Color,Precio1,Serie1,numAsientos,numPuertas,capacidadMaletero,modelo,marca,anio_fab});
+						
+					}z++;
+					conn.close();}
+					else {
+						JOptionPane.showMessageDialog(null, "Ya se esán mostrando los vehículos en stock","Error",
+						JOptionPane.ERROR_MESSAGE);	
+					}}else if(camionesColor.isSelected() == true) {
+						
+						String sql ="call colorCamion('"+colorField.getText()+"')";
+						
+						PreparedStatement ps = conn.prepareStatement(sql);
+						
+						ResultSet rs = ps.executeQuery();
+						
+						String Matricula = "";
+						String NumBastidor = "";
+						String Color = "";
+						int Serie = 0;
+						int Precio = 0;
+						int numAsientos = 0;
+						String TipoMercancia = "";
+						int capacidadCarga = 0;
+						String modelo = "";
+						String marca = "";
+						int anio_fab = 0;
+						
+						
+						if(z<1) {
+						model.setRowCount(0);
+						while(rs.next() ) {
+							Matricula = rs.getString("Matricula");
+							NumBastidor = rs.getString("NumBastidor");
+							Color = rs.getString("Color");
+							Serie= rs.getInt("numSerie");
+							Precio = rs.getInt("Precio");
+							numAsientos = rs.getInt("numAsientos");
+							TipoMercancia = rs.getString("tipoMercancia");
+							capacidadCarga = rs.getInt("carga");
+							modelo = rs.getString("modelo");
+							marca = rs.getString("marca");
+							anio_fab = rs.getInt("añoFabricacion");
+							model.addRow(new Object[] {Matricula,NumBastidor,Color,Precio,Serie,numAsientos,capacidadCarga,TipoMercancia,modelo,marca,anio_fab});
+							
+						}z++;
+						conn.close();}
+						else {
+							JOptionPane.showMessageDialog(null, "Ya se esán mostrando los vehículos en stock","Error",
+							JOptionPane.ERROR_MESSAGE);	
+						}
+						
+						
+						
+						
+					}
+				}catch(Exception ex)
+				{
+					JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",
+					JOptionPane.ERROR_MESSAGE);
+					}
+			}
+			
+		});
+		mostrar.setBounds(1222, 424, 89, 23);
+		contentPane.add(mostrar);
+		
+		colorField = new JTextField();
+		colorField.setBounds(1123, 425, 86, 20);
+		contentPane.add(colorField);
+		colorField.setColumns(10);
 		
 		
 		

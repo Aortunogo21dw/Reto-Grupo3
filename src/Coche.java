@@ -3,7 +3,7 @@ public class Coche {
 	private String Mat;
 	private String NumBast;
 	private int Precio;
-	private String Serie;
+
 	private String color;
 	private int numAsientos;
 	private int numPuertas;
@@ -12,11 +12,11 @@ public class Coche {
 	private String marca;
 	private String Modelo;
 	
-	public Coche(String mat , String numbast , int precio , String Serie , String color,int asientos , int puertas , int capmal,String aniofab,String marca,String Modelo) {
+	public Coche(String mat , String numbast , int precio ,  String color,int asientos , int puertas , int capmal,String aniofab,String marca,String Modelo) {
 		this.Mat = mat;
 		this.NumBast = numbast;
 		this.Precio = precio;
-		this.Serie = Serie;
+	
 		this.color = color;
 		this.numAsientos = asientos;
 		this.numPuertas = puertas;
@@ -50,13 +50,7 @@ public class Coche {
 		Precio = precio;
 	}
 
-	public String getSerie() {
-		return Serie;
-	}
-
-	public void setSerie(String serie) {
-		Serie = serie;
-	}
+	
 
 	public String getColor() {
 		return color;
