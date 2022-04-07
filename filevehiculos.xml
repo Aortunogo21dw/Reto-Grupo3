@@ -1,0 +1,79 @@
+
+ <list>
+
+    <camion>
+        <numBastidor>1111111</numBastidor>
+        <carga>500</carga>
+        <tipoMercancia>Tierra</tipoMercancia>
+        <matricula>6789423</matricula>
+        <color>Rojo</color>
+        <numAsientos>5</numAsientos>
+        <precio>10000</precio>
+        <tablaserie>                 
+                <modelo>CamionScania</modelo>
+                <marca>Scania</marca>
+                <añoFabricacion>1968</añoFabricacion>
+        </tablaserie>
+    </camion>
+    <camion>
+        <numBastidor>12346655</numBastidor>
+        <carga>500</carga>
+        <tipoMercancia>Arena</tipoMercancia>
+        <matricula>90989989</matricula>
+        <color>Rogo</color>
+        <numAsientos>5</numAsientos>
+        <precio>10000</precio>
+         
+        <tablaserie>
+              
+                <modelo>CamionPegaso</modelo>
+                <marca>Pegaso</marca>
+                <añoFabricacion>1993</añoFabricacion>
+        </tablaserie>
+    </camion>
+     <coche>
+        <numBastidor>12349995</numBastidor>
+        <capacidadMaletero>500</capacidadMaletero>
+        <numPuertas>5</numPuertas>
+        <matricula>90989989</matricula>
+        <color>Rogo</color>
+        <numAsientos>5</numAsientos>
+        <precio>10000</precio>
+         
+        <tablaserie>
+                <modelo>Impreza</modelo>
+                <marca>Ferrari</marca>
+                <añoFabricacion>2003</añoFabricacion>
+            </tablaserie>
+    </coche>
+     <coche>
+        <numBastidor>12349996</numBastidor>
+        <capacidadMaletero>500</capacidadMaletero>
+        <numPuertas>5</numPuertas>
+        <matricula>90989980</matricula>
+        <color>Rogo</color>
+        <numAsientos>5</numAsientos>
+        <precio>10000</precio>
+        <tablaserie>
+                <modelo>Puigdemont</modelo>
+                <marca>Fiat</marca>
+                <añoFabricacion>2005</añoFabricacion>
+            </tablaserie>
+    </coche>
+    <coche>
+        <numBastidor>12349997</numBastidor>
+        <capacidadMaletero>500</capacidadMaletero>
+        <numPuertas>5</numPuertas>
+        <matricula>90989900</matricula>
+        <color>Rogo</color>
+        <numAsientos>5</numAsientos>
+        <precio>10000</precio>
+        <tablaserie>
+                <modelo>Puigdemont</modelo>
+                <marca>Fiat</marca>
+                <añoFabricacion>2005</añoFabricacion>
+            </tablaserie>
+    </coche>
+  
+    
+ </list>

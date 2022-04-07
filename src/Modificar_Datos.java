@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -41,9 +42,18 @@ import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -61,7 +71,6 @@ import java.io.InputStream;
 
 
 public class Modificar_Datos extends JFrame {
-
 	private JPanel contentPane;
 	private JTextField matricula;
 	private JTextField bastidor;
@@ -255,7 +264,19 @@ public class Modificar_Datos extends JFrame {
 		JButton BotGuardar = new JButton("Guardar Selecci\u00F3n");
 		BotGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
 				try {
+					
+					if(precio.getText().equals("") | matricula.getText().equals("") | bastidor.getText().equals("") | Asientos.getText().equals("") | NumPuertasT.getText().equals("") | CapacidadMaletero.getText().equals("") | ColorText.getText().equals("") | AnioFab.getText().equals("") | Marca.getText().equals("") | Modelo.getText().equals("")) {
+						throw new Exception("No se pueden dejar campos vacíos");
+					}
+					
+					
+					
+					
+					
+					
 					if (SelecCoche.isEnabled() == true) {
 					coche =	new Coche(matricula.getText(),bastidor.getText(),Integer.parseInt(precio.getText()),ColorText.getText(),Integer.parseInt(Asientos.getText()),Integer.parseInt(NumPuertasT.getText()),Integer.parseInt(CapacidadMaletero.getText()),AnioFab.getText(),Marca.getText(),Modelo.getText());
 					textArea.setText("");
@@ -266,16 +287,8 @@ public class Modificar_Datos extends JFrame {
 					textArea.append("Numero Matrícula : "+camion.getMat()+"\n"+"Numero Bastidor : "+camion.getNumBast()+"\n"+"Precio : "+camion.getPrecio()+ "\n" +"Color : "+camion.getColor()+"\n"+"Número Asientos : "+camion.getNumAsientos()+"\n"+"Capacidad de carga : "+camion.getCapacidadCarga()+"\n"+"Tipo de carga : "+camion.getTipoCarga()+"\n"+"Año Fabricación : "+camion.getAnio_fab()+"\n"+"Marca : "+camion.getMarca()+"\n"+"Modelo : "+camion.getMarca());
 					}
 					
-					 
 					
-					
-								
-				if(precio.getText().equals("") == false) {
-					
-					
-				}
-				
-				
+		
 				
 				
 				}
@@ -355,14 +368,14 @@ public class Modificar_Datos extends JFrame {
 					Connection conn = DriverManager.getConnection(url,userName,password);
 					
 					if(SelectCamion.isSelected() == true) {
-						String sql = "update camion set matricula ='"+camion.getMat()+"' ,"+"numBastidor = '"+camion.getNumBast()+"' ,"+"precio = '"+camion.getPrecio()+"' ,"+"color ='"+camion.getColor()+"' ,"+"numAsientos = '"+camion.getNumAsientos()+"' ,"+"carga = '"+camion.getCapacidadCarga()+"',"+"tipoMercancia = '"+camion.getTipoCarga()+"'"+"where matricula ='"+camion.getMat()+"'"+";";
+						String sql = "update camion set "+"precio = '"+camion.getPrecio()+"' ,"+"color ='"+camion.getColor()+"' ,"+"numAsientos = '"+camion.getNumAsientos()+"' ,"+"carga = '"+camion.getCapacidadCarga()+"',"+"tipoMercancia = '"+camion.getTipoCarga()+"'"+"where matricula ='"+camion.getMat()+"'"+";";
 						PreparedStatement ps = conn.prepareStatement(sql);
 						ps.execute(sql);
 						conn.close();
 						
 						
 					}else if(SelecCoche.isSelected() == true) {
-						String sql = "update coche set matricula ='"+coche.getMat()+"' ,"+"numBastidor = '"+coche.getNumBast()+"' ,"+"precio = '"+coche.getPrecio()+"' ,"+"color ='"+coche.getColor()+"' ,"+"numAsientos = '"+coche.getNumAsientos()+"' ,"+"numPuertas = '"+coche.getNumPuertas()+"',"+"capacidadMaletero = '"+coche.getCapacidadMaletero()+"'"+"where matricula ='"+coche.getMat()+"'"+";";
+						String sql = "update coche set "+"precio = '"+coche.getPrecio()+"' ,"+"color ='"+coche.getColor()+"' ,"+"numAsientos = '"+coche.getNumAsientos()+"' ,"+"numPuertas = '"+coche.getNumPuertas()+"',"+"capacidadMaletero = '"+coche.getCapacidadMaletero()+"'"+"where matricula ='"+coche.getMat()+"'"+";";
 						PreparedStatement ps = conn.prepareStatement(sql);
 						ps.execute(sql);
 						conn.close();
@@ -408,17 +421,7 @@ public class Modificar_Datos extends JFrame {
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		
 		DefaultTableModel model = new DefaultTableModel();
 		
@@ -1028,6 +1031,8 @@ public class Modificar_Datos extends JFrame {
 					BuscarVentas.setEnabled(false);
 					Fecha1.setEnabled(false);
 					Fecha2.setEnabled(false);
+					Fecha1.setText("");
+					Fecha2.setText("");
 				}else if(VentasFecha.isSelected() == true) {
 					String[] columnNames = {"id","Bastidor","matricula","color","Asientos","Serie","precio","fecha","tipocambio","tipovehículo"};
 					model.setColumnIdentifiers(columnNames);
@@ -1146,22 +1151,20 @@ public class Modificar_Datos extends JFrame {
 		BotLeerXML.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean existe = false;
-				   // Instantiate the Factory
+				
 			      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			    
 			      try {
 			    	  Connection conn = DriverManager.getConnection(url,userName,password);
-			          // optional, but recommended
-			          // process XML securely, avoid attacks like XML External Entities (XXE)
+			         
 			          dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
 
-			          // parse XML file
+			          
 			          DocumentBuilder db = dbf.newDocumentBuilder();
 
-			          Document doc = db.parse(new File("C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/filecamion2.xml"));
+			          Document doc = db.parse(new File("C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/filevehiculos.xml"));
 
-			          // optional, but recommended
-			          // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
+			      
 			          doc.getDocumentElement().normalize();
 
 			     
@@ -1247,28 +1250,11 @@ public class Modificar_Datos extends JFrame {
 									
 									
 								}
-								
-								
-						
-			                  
-			                  
-			                  
-			                  
-			                  
-			                  
-			                  
-			                  
+  
 			                  
 			              }
 			              
-			            
-			              
-			              
-			              
-			              
-			            
-			              
-			              
+		 
 			              
 			          }
 			          
@@ -1362,15 +1348,9 @@ public class Modificar_Datos extends JFrame {
 			                 
 			              }
 			              
-			            
 		  
 			          }
-			          
-			          
-			          
-			          
-			          
-			          
+
 			          conn.close();
 			          
 			          
@@ -1380,57 +1360,6 @@ public class Modificar_Datos extends JFrame {
 			         e1.printStackTrace();
 			      }
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-			
 
 			}
 		});
@@ -1444,14 +1373,211 @@ public class Modificar_Datos extends JFrame {
 		JButton btnNewButton = new JButton("Exportar XML Tabla");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Document doc = null;
 				
+				try {
+					Connection conn = DriverManager.getConnection(url,userName,password);
+					DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+					DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+			      	String sql = "select coche.*,serie.modelo,serie.marca,serie.añoFabricacion from coche inner join serie where coche.numSerie = serie.numSerie;";
+					PreparedStatement ps = conn.prepareStatement(sql);
+					ResultSet rs = ps.executeQuery();
+					String Matricula = "";
+					String NumBastidor = "";
+					String Color = "";
+					int numAsientos = 0;
+					int numPuertas = 0;
+					int capacidadMaletero = 0;
+					int Precio1 = 0;
+					String modelo = "";
+					String marca = "";
+					int anio_fab = 0;
+					
+					 doc = docBuilder.newDocument();
+				      Element rootElement = doc.createElement("Vehiculos");
+				      doc.appendChild(rootElement);
 				
-				//Por hacer
+				  
+					
+					while(rs.next()) {
+						Matricula = rs.getString("matricula");
+						NumBastidor = rs.getString("numBastidor");
+						Color = rs.getString("Color");
+						Precio1 = rs.getInt("precio");
+						numAsientos =rs.getInt("numAsientos");
+						numPuertas =rs.getInt("numPuertas");
+						capacidadMaletero =rs.getInt("capacidadMaletero");
+						modelo = rs.getString("modelo");
+						marca = rs.getString("marca");
+						anio_fab = rs.getInt("añoFabricacion");
+						
+						  Element coche = doc.createElement("coche");
+					      rootElement.appendChild(coche);
+						
+
+					      Element numBastidor1= doc.createElement("numBastidor");
+					      numBastidor1.setTextContent(NumBastidor);
+					      coche.appendChild(numBastidor1);
 				
+					      Element Matricula1 = doc.createElement("matricula");
+					      Matricula1.setTextContent(Matricula);
+					      coche.appendChild(Matricula1);
+					      
+					      Element Color1 = doc.createElement("color");
+					      Color1.setTextContent(Color);
+					      coche.appendChild(Color1);
+					     
+					      
+					      Element numAsientos1 = doc.createElement("numAsientos");
+					      numAsientos1.setTextContent(Integer.toString(numAsientos));
+					      coche.appendChild(numAsientos1);
+					      
+					      Element numPuertas1 = doc.createElement("numPuertas");
+					      numPuertas1.setTextContent(Integer.toString(numPuertas));
+					      coche.appendChild(numPuertas1);
+					      
+					      
+					      Element precio1 = doc.createElement("precio");
+					      precio1.setTextContent(Integer.toString(Precio1));
+					      coche.appendChild(precio1);
+					      
+					      
+					      Element capacidadMaletero1 = doc.createElement("capacidadMaletero");
+					      numPuertas1.setTextContent(Integer.toString(capacidadMaletero));
+					      coche.appendChild(capacidadMaletero1);
 				
+					      Element tablaserie = doc.createElement("tablaserie");
+					      coche.appendChild(tablaserie);
+					      
+					      Element modelo1 = doc.createElement("modelo");
+					      modelo1.setTextContent(modelo);
+					      tablaserie.appendChild(modelo1);
+					      
+					      Element marca1 = doc.createElement("marca");
+					      marca1.setTextContent(marca);
+					      tablaserie.appendChild(marca1);
+					      
+					      
+					      Element aniofab = doc.createElement("anioFabricacion");
+					      aniofab.setTextContent(Integer.toString(anio_fab));
+					      tablaserie.appendChild(aniofab);
+					      
+					    	      
+					      
+					}
+					
+				
+					conn = DriverManager.getConnection(url,userName,password);
+					String sql2 = "select camion.*,serie.modelo,serie.marca,serie.añoFabricacion from camion  inner join serie where camion.numSerie = serie.numSerie;";
+					PreparedStatement ps2 = conn.prepareStatement(sql2);
+					ResultSet rs3 = ps2.executeQuery();
+					String Matricula2 = "";
+					String NumBastidor2 = "";
+					String Color2 = "";
+					int Precio2 = 0;
+					int numAsientos2 = 0;
+					String TipoMercancia2 = "";
+					int capacidadCarga2 = 0;
+					String modelo2 = "";
+					String marca2 = "";
+					int anio_fab2 = 0;
+					
+					
+					while(rs3.next()) {
+						Matricula2 = rs3.getString("Matricula");
+						NumBastidor2= rs3.getString("NumBastidor");
+						Color2 = rs3.getString("Color");
+						Precio2 = rs3.getInt("Precio");
+						numAsientos2 = rs3.getInt("numAsientos");
+						TipoMercancia2 = rs3.getString("tipoMercancia");
+						capacidadCarga2 = rs3.getInt("carga");
+						modelo2 = rs3.getString("modelo");
+						marca2 = rs3.getString("marca");
+						anio_fab2 = rs3.getInt("añoFabricacion");
+						
+						
+						
+						 Element camion = doc.createElement("camion");
+					      rootElement.appendChild(camion);
+						
+
+					      Element numBastidor1= doc.createElement("numBastidor");
+					      numBastidor1.setTextContent(NumBastidor2);
+					      camion.appendChild(numBastidor1);
+				
+					      Element Matricula1 = doc.createElement("matricula");
+					      Matricula1.setTextContent(Matricula2);
+					      camion.appendChild(Matricula1);
+					      
+					      Element Color1 = doc.createElement("color");
+					      Color1.setTextContent(Color2);
+					      camion.appendChild(Color1);
+					      
+					      Element numAsientos1 = doc.createElement("numAsientos");
+					      numAsientos1.setTextContent(Integer.toString(numAsientos2));
+					      camion.appendChild(numAsientos1);
+					      
+					      Element tipoMercancia = doc.createElement("tipoMercancia");
+					      tipoMercancia.setTextContent(TipoMercancia2);
+					      camion.appendChild(tipoMercancia);
+					      
+					      Element capacidadCarga = doc.createElement("capacidadCarga");
+					      capacidadCarga.setTextContent(Integer.toString(capacidadCarga2));
+					      camion.appendChild(capacidadCarga);
+					      
+					      
+					      Element precio1 = doc.createElement("precio");
+					      precio1.setTextContent(Integer.toString(Precio2));
+					      camion.appendChild(precio1);
+					      
+				
+					      Element tablaserie = doc.createElement("tablaserie");
+					      camion.appendChild(tablaserie);
+					      
+					      Element modelo1 = doc.createElement("modelo");
+					      modelo1.setTextContent(modelo2);
+					      tablaserie.appendChild(modelo1);
+					      
+					      Element marca1 = doc.createElement("marca");
+					      marca1.setTextContent(marca2);
+					      tablaserie.appendChild(marca1);
+					      
+					      
+					      Element aniofab = doc.createElement("anioFabricacion");
+					      aniofab.setTextContent(Integer.toString(anio_fab2));
+					      tablaserie.appendChild(aniofab);
+					      
+							
 			
+				}
+					 
+					  
+					
+					  
+
+				
+				}catch(ParserConfigurationException  | SQLException e4 ) {
+						e4.printStackTrace();
+					}
+				
+				
+				
+				 try (FileOutputStream output =
+		                  new FileOutputStream("C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\Prueba.xml")) { //C:\\Users\\ik012982i9\\Desktop\\Carpeta\\Reto-Grupo3\\prueba.xml <----- Ejemplo
+					// escribirXML(doc,output); <------- Para que salga
+					 escribirXML(doc, output);
+		     } catch (IOException e8) {
+		        e8.printStackTrace();
+		     } catch (TransformerException e1) {
+				// TODO Bloque catch generado automáticamente
+				e1.printStackTrace();
+			}
+		
 			}
 		});
+		
+		
+		
 		
 		
 		btnNewButton.setBounds(1212, 458, 172, 23);
@@ -1463,6 +1589,8 @@ public class Modificar_Datos extends JFrame {
 		/**
 		 * Devuelven características de los vehículos dependiendo del color
 		 */
+		
+		
 		
 		
 		
@@ -1611,7 +1739,44 @@ public class Modificar_Datos extends JFrame {
 		contentPane.add(colorField);
 		colorField.setColumns(10);
 		
+		JButton BotonInstrucciones = new JButton("Ver instrucciones");
+		BotonInstrucciones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Instrucciones pantalla1 = new Instrucciones();
+				
+				pantalla1.setVisible(true);
+				
+				
+				
+				
+			}
+		});
+		BotonInstrucciones.setBounds(42, 458, 149, 23);
+		contentPane.add(BotonInstrucciones);
+		
 		
 		
 	}
+	
+
+	  private static void escribirXML(Document doc,
+	                               OutputStream output)
+	          throws TransformerException {
+
+	      TransformerFactory transformerFactory = TransformerFactory.newInstance();
+	      Transformer transformer = transformerFactory.newTransformer();
+
+	    
+	      transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+	      DOMSource source = new DOMSource(doc);
+	      StreamResult result = new StreamResult(output);
+
+	      transformer.transform(source, result);
+
+	  }
+	
+	
 }
+

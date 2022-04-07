@@ -3,7 +3,6 @@ public class Coche {
 	private String Mat;
 	private String NumBast;
 	private int Precio;
-
 	private String color;
 	private int numAsientos;
 	private int numPuertas;
@@ -16,7 +15,7 @@ public class Coche {
 		this.Mat = mat;
 		this.NumBast = numbast;
 		this.Precio = precio;
-	
+
 		this.color = color;
 		this.numAsientos = asientos;
 		this.numPuertas = puertas;
@@ -24,6 +23,7 @@ public class Coche {
 		this.marca = marca;
 		this.Modelo=Modelo;
 		this.aniofab=aniofab;
+		
 	}
 
 	public String getMat() {
