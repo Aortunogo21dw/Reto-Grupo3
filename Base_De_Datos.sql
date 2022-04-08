@@ -79,7 +79,7 @@ CREATE TABLE `coche` (
 
 LOCK TABLES `coche` WRITE;
 /*!40000 ALTER TABLE `coche` DISABLE KEYS */;
-INSERT INTO `coche` VALUES ('12349996',3333,3333,'90989980','3333','3333',3333,2),('12349997',5,500,'90989900','Rogo','5',10000,2);
+INSERT INTO `coche` VALUES ('12349995',5,500,'90989989','Rogo','5',10000,1),('12349996',5,500,'90989980','Rogo','5',10000,2),('12349997',5,500,'90989900','Rogo','5',10000,2);
 /*!40000 ALTER TABLE `coche` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,7 +102,7 @@ CREATE TABLE `historial` (
   `tipocambio` varchar(20) NOT NULL,
   `tipovehículo` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,7 +111,7 @@ CREATE TABLE `historial` (
 
 LOCK TABLES `historial` WRITE;
 /*!40000 ALTER TABLE `historial` DISABLE KEYS */;
-INSERT INTO `historial` VALUES (1,'12349995','90989989','Rogo',5,1,10000,'2022-04-07','Compra','Coche'),(2,'12349996','90989980','Rogo',5,2,10000,'2022-04-07','Compra','Coche'),(3,'12349997','90989900','Rogo',5,2,10000,'2022-04-07','Compra','Coche'),(4,'1111111','6789423','Rojo',5,3,10000,'2022-04-07','Compra','Camión'),(5,'12346655','90989989','Rogo',5,4,10000,'2022-04-07','Compra','Camión'),(6,'12349995','90989989','Rogo',5,1,10000,'2022-04-07','Vender','Coche'),(7,'123','123','123',123,5,123,'2022-04-07','Compra','Coche'),(8,'123','123','123',123,5,123,'2022-04-07','Vender','Coche'),(9,'12349996','90989980','3333',3333,2,3333,'2022-04-07','Modificacion','Coche');
+INSERT INTO `historial` VALUES (1,'12349995','90989989','Rogo',5,1,10000,'2022-04-08','Compra','Coche'),(2,'12349996','90989980','Rogo',5,2,10000,'2022-04-08','Compra','Coche'),(3,'12349997','90989900','Rogo',5,2,10000,'2022-04-08','Compra','Coche'),(4,'1111111','6789423','Rojo',5,3,10000,'2022-04-08','Compra','Camión'),(5,'12346655','90989989','Rogo',5,4,10000,'2022-04-08','Compra','Camión'),(6,'123','123','123',123,5,123,'2022-04-08','Compra','Coche'),(7,'123','123','123',123,5,123,'2022-04-08','Vender','Coche'),(8,'123','123','123',123,5,123,'2022-04-08','Compra','Coche'),(9,'123','123','12344',44,5,444,'2022-04-08','Modificacion','Coche'),(10,'123','123','12344',44,5,444,'2022-04-08','Vender','Coche');
 /*!40000 ALTER TABLE `historial` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,4 +151,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-07 12:34:18
+-- Dump completed on 2022-04-08  8:56:20

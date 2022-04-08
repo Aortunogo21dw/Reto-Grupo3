@@ -268,9 +268,6 @@ public class Modificar_Datos extends JFrame {
 				
 				try {
 					
-					if(precio.getText().equals("") | matricula.getText().equals("") | bastidor.getText().equals("") | Asientos.getText().equals("") | NumPuertasT.getText().equals("") | CapacidadMaletero.getText().equals("") | ColorText.getText().equals("") | AnioFab.getText().equals("") | Marca.getText().equals("") | Modelo.getText().equals("")) {
-						throw new Exception("No se pueden dejar campos vacíos");
-					}
 					
 					
 					
@@ -875,7 +872,7 @@ public class Modificar_Datos extends JFrame {
 					Modelo.setEnabled(true);
 					AnioFab.setEnabled(true);
 					ColorText.setEnabled(true);
-					String[] columnNames = {"Matricula","Bastidor","Color","Precio","Serie","Asientos","Cap.Carga","Ti.Carga","Marca","Modelo","Año"};
+					String[] columnNames = {"Matricula","Bastidor","Color","Precio","Serie","Asientos","Cap.Carga","Ti.Carga","Modelo","Marca","Año"};
 					model.setColumnIdentifiers(columnNames);
 					z=0;
 					model.setRowCount(0);
@@ -945,7 +942,7 @@ public class Modificar_Datos extends JFrame {
 					AnioFab.setEnabled(true);
 					ColorText.setEnabled(true);
 					z=0;
-					String[] columnNames = {"Matricula","Bastidor","Color","Precio","Serie","Asientos","Puertas","Maletero","Marca","Modelo","Año"};
+					String[] columnNames = {"Matricula","Bastidor","Color","Precio","Serie","Asientos","Puertas","Maletero","Modelo","Marca","Año"};
 					model.setColumnIdentifiers(columnNames);
 					model.setRowCount(0);
 					BotStock.setEnabled(true);
@@ -1599,6 +1596,8 @@ public class Modificar_Datos extends JFrame {
 		camionesColor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(camionesColor.isSelected() == true) {
+					String[] columnNames = {"Matricula","Bastidor","Color","Precio","Serie","Asientos","Cap.Carga","Ti.Carga","Modelo","Marca","Año"};
+					model.setColumnIdentifiers(columnNames);
 					cochesColor.setEnabled(false);
 				}else {
 					cochesColor.setEnabled(true);
@@ -1611,6 +1610,9 @@ public class Modificar_Datos extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(cochesColor.isSelected() == true) {
 					camionesColor.setEnabled(false);
+					String[] columnNames = {"Matricula","Bastidor","Color","Precio","Serie","Asientos","Puertas","Maletero","Modelo","Marca","Año"};
+					model.setColumnIdentifiers(columnNames);
+					
 				}else {
 					camionesColor.setEnabled(true);
 				}

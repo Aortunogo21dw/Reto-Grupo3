@@ -1,6 +1,5 @@
 
 
-
 delimiter $$
 
 create trigger insertar1 after insert on coche
@@ -12,7 +11,7 @@ END$$
 
 delimiter ;
 
---
+
 
 delimiter $$
 
@@ -25,7 +24,7 @@ END$$
 
 delimiter ;
 
---
+
 
 select * from historial;
 truncate table historial;
@@ -44,7 +43,7 @@ END$$
 
 delimiter ;
 
---
+
 
 
 delimiter $$
@@ -58,8 +57,6 @@ END$$
 
 delimiter ;
 
-
---
 
 
 
@@ -88,23 +85,6 @@ delimiter ;
 
 
 
-drop trigger update1;
-drop trigger update2;
-drop trigger ai_data1;
-truncate table camion;
-truncate table coche;
-
-
-select * from historial
-group by numBastidor;
-
-truncate table serie;
-select * from coche  ;
-
-
-
-
-
 delimiter //
 create procedure colorCamion(in var varchar(20))
 Begin
@@ -119,28 +99,15 @@ select coche.*,serie.modelo,serie.marca,serie.añoFabricacion from coche inner j
 end;
 //
 
-drop procedure colorCamion;
-drop procedure colorCoche;
-
- 
 
 
-select * from camion;
-select * from coche;
-select * from serie;
-select * from historial;
-SET FOREIGN_KEY_CHECKS = 0;
-truncate table historial;
-truncate table serie;
-truncate table coche;
+SET foreign_key_checks = 0;
 truncate table camion;
+truncate table coche;
+truncate table serie;
+truncate table historial;
 
 
-
-
-
-select camion.*,serie.modelo,serie.marca,serie.añoFabricacion from camion  inner join serie where camion.numSerie = serie.numSerie;
-select coche.*,serie.modelo,serie.marca,serie.añoFabricacion from coche inner join serie where coche.numSerie = serie.numSerie;
 
 
 
